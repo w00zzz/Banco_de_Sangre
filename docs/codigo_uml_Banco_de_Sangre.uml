@@ -1,0 +1,90 @@
+@startuml
+
+class Donante {
+  - CI: String
+  - nombre: String
+  - apellidos: String
+  - grupoSanguineo: String
+  - factorRH: String
+  - direccion: String
+  - observaciones: String
+  - donaciones: List<Donacion>
+
+  + getCI(): String
+  + getNombre(): String
+  + getApellidos(): String
+  + getGrupoSanguineo(): String
+  + getFactorRH(): String
+  + getDireccion(): String
+  + getObservaciones(): String
+  + getDonaciones(): List<Donacion>
+
+  + setCI(CI: String): void
+  + setNombre(nombre: String): void
+  + setApellidos(apellidos: String): void
+  + setGrupoSanguineo(grupoSanguineo: String): void
+  + setFactorRH(factorRH: String): void
+  + setDireccion(direccion: String): void
+  + setObservaciones(observaciones: String): void
+  + setDonaciones(donaciones: List<Donacion>): void
+  
+}
+class Donacion {
+  - fecha: String
+  - volumen: double
+  - codigoBolsa: String
+  - localizacion: String
+  - CIEmpleado: String
+
+  + getFecha(): String
+  + getVolumen(): double
+  + getCodigoBolsa(): String
+  + getLocalizacion(): String
+  + getCIEmpleado(): String
+
+  + setFecha(fecha: String): void
+  + setVolumen(volumen: double): void
+  + setCodigoBolsa(codigoBolsa: String): void
+  + setLocalizacion(localizacion: String): void
+  + setCIEmpleado(CIEmpleado: String): void
+}
+
+class Personal {
+  - CI: String
+  - nombre: String
+  - apellidos: String
+  - direccion: String
+  - cargo: String
+
+  + getCI(): String
+  + getNombre(): String
+  + getApellidos(): String
+  + getDireccion(): String
+  + getCargo(): String
+
+  + setCI(CI: String): void
+  + setNombre(Nombre: String): void
+  + setApellidos(Apellidos: String): void
+  + setDireccion(Direccion: String): void
+  + setCargo(Cargo: String): void
+}
+
+class BancoDeSangre {
+  - direccion: String
+  - personal: List<Personal>
+
+  + getDireccion(): String
+  + getPersonal(): List<Personal>
+  + searchDatosDonante(CI: String): void
+  + getDonantesMayorCantidadDonaciones(): List<Donante>
+  + getDonantesOPositivoSinDonacionesDesdeMes(mes: String): List<Donante>
+  + getDonantesOrdenadosPorNombre(): List<Donante>
+  + getDonantesOrdenadosPorGrupoSanguineoYFactorRH(): List<Donante>
+  + addDonante(donante: Donante): void
+  + delDonante(CI: String): void
+  + modDonante(CI: String, donante: Donante): void
+}
+
+Donante "1" -- "0..*" Donacion
+BancoDeSangre "1" -- "0..*" Personal
+
