@@ -1,0 +1,52 @@
+@startuml
+class Banco_de_Sangre {
+  -donantes: List<Donante>
+  -direccion: String
+  -personal: List<Empleado>
+
+  +BuscarMostrarDatosDonante(carnetIdentidad: String): Donante
+  +DonantesMayorCantidadDonaciones(): List<Donante>
+  +DonantesOPositivoSinDonacionesDesdeCiertoMes(mes: String): List<Donante>
+  +OrdenarDonantesAlfabeticamentePorNombreYApellidos(): List<Donante>
+  +OrdenarDonantesPorGrupoSanguineoYFactorRH(): List<Donantes>
+  +AñadirDonante(donante: Donante): void
+  +EliminarDonante(carnetIdentidadDonante: String): void
+  +ModificarDonante(canetIdentidadDonante: String, donante: Donante): void
+  +AñadirDonacion(donacion: Donacion): void
+  +EliminarDonacion(codigoBolsa: String): void
+  +ModificarDonacion(codigoBolsa: String): void
+  +AñadirEmpleado(empleado: Empleado): void
+  +EliminarEmpleado(carnetIdentidadEmpleado: String): void
+  +ModificarEmpleado(carnetIdentidadEmpleado: String, empleado: Empleado): void
+}
+
+class Persona{
+  +carnetIdentidad: String
+  +nombres: String
+  +apellidos: String
+  +direccion: String
+}
+
+class Empleado extends Persona{
+  -cargo: String
+}
+
+class Donante extends Persona {
+  -grupoSanguineo: String
+  -factorRH: bool
+  -observaciones: String
+  -donaciones: List<Donacion>
+}
+
+class Donacion{
+  -fecha: String
+  -volumen: double
+  -codigoBolsa: String
+  -localizacionActual: String
+  -carnetIdentidadEmpleadoExtraccion: String
+}
+
+Banco_de_Sangre "1" -down-> "1..*" Empleado
+Banco_de_Sangre "1" -down-> "0..*" Donante
+Donante "1" --> "1..*" Donacion
+@enduml
